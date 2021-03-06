@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="column">
+    <h1>Events&nbsp;&nbsp;&nbsp;&nbsp;<%= link "New Event", to: Routes.event_path(@conn, :new), class: "btn btn-success" %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <%= for event <- @events do %>
+    <div class="column">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= event.name %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= event.when %></h6>
+        <p class="card-text"><%= event.description %></p>
+        <span><%= link "View", to: Routes.event_path(@conn, :show, event) %></span>
+      </div>
+    </div>
+    </div>
+  <% end %>
+</div>

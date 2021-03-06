@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><%= @user.name %></h5>
+    <p class="card-text"><%= @user.email %></p>
+    <span><%= link "Edit", to: Routes.event_path(@conn, :edit, @user) %></span>
+    &nbsp;
+    <span><%= link "Back", to: Routes.event_path(@conn, :index) %></span>
+  </div>
+</div>
