@@ -19,7 +19,6 @@
          <div class="col">
           <%= link "Home", to: "/" %>
         </div>
-
         <div class="col">
           <%= link "Create Account", to: Routes.user_path(@conn, :new)%>
         </div>
@@ -27,10 +26,16 @@
 
           <%= if @conn.assigns[:current_user] do %>
           <div class="col">
+            <img id="profile"
+              src="<%= Routes.user_path(@conn, :prof_pic_hash, @current_user)%>"
+              class="card-img-top"
+              alt="<%= @current_user.name%>'s Profile Photo"
+              width="20" height="20"
+            />
             User: <%= @current_user.name %> |
             <%= link("Logout", to: Routes.session_path(@conn, :delete),
             method: :delete) %>
-            </div>
+          </div>
           <% else %>
           <div class="col">
             <%= form_for @conn,
