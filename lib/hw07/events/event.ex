@@ -6,6 +6,7 @@ defmodule Hw07.Events.Event do
     field :description, :string
     field :name, :string
     field :when, :date
+    belongs_to :user, Hw07.Users.User
 
     timestamps()
   end
@@ -13,7 +14,7 @@ defmodule Hw07.Events.Event do
   @doc false
   def changeset(event, attrs) do
     event
-    |> cast(attrs, [:name, :when, :description])
-    |> validate_required([:name, :when, :description])
+    |> cast(attrs, [:name, :when, :description, :user_id])
+    |> validate_required([:name, :when, :description, :user_id])
   end
 end

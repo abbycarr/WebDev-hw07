@@ -20,6 +20,7 @@ defmodule Hw07Web.Router do
     get "/", PageController, :index
     resources "/events", EventController
     resources "/users", UserController
+    get "/users/:id/prof_pic_hash", UserController, :prof_pic_hash
     resources "/sessions", SessionController,
       only: [:create, :delete], singleton: true
   end

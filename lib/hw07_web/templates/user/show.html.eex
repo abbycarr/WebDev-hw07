@@ -1,4 +1,9 @@
 <div class="card">
+<img
+    src="<%= Routes.user_path(@conn, :prof_pic_hash, @user)%>"
+    class="card-img-top"
+    alt="<%= @user.name%>'s Profile Photo"
+  />
   <div class="card-body">
     <h5 class="card-title"><%= @user.name %></h5>
     <p class="card-text"><%= @user.email %></p>

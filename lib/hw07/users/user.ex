@@ -5,6 +5,8 @@ defmodule Hw07.Users.User do
   schema "users" do
     field :email, :string
     field :name, :string
+    field :prof_pic_hash, :string
+    has_many :events, Hw07.Events.Event
 
     timestamps()
   end
@@ -12,7 +14,7 @@ defmodule Hw07.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :email])
-    |> validate_required([:name, :email])
+    |> cast(attrs, [:name, :email, :prof_pic_hash])
+    |> validate_required([:name, :email, :prof_pic_hash])
   end
 end
