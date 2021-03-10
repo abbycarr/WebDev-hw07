@@ -10,7 +10,12 @@
     <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title"><%= event.name %></h5>
-        <p><span class="badge bg-dark text-light">Hosted By <%= event.user.name%></span></p>
+        <p><span class="badge bg-dark text-light">Hosted By
+        <img id="profile-text"
+              src="<%= Routes.user_path(@conn, :prof_pic_hash, event.user)%>"
+              class="card-img-top"
+              alt="<%= event.user.name%>'s Profile Photo"
+            /><%= event.user.name%></span></p>
         <h6 class="card-subtitle mb-2 text-muted"><%= event.when %></h6>
         <p class="card-text"><%= event.description %></p>
         <span><%= link "View", to: Routes.event_path(@conn, :show, event) %></span>

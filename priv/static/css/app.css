@@ -7189,9 +7189,16 @@ a.text-dark:hover, a.text-dark:focus {
 .invalid-feedback {
   display: block; }
 
-#profile {
+#profile-top {
   width: 25px;
   height: 25px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50% 50%; }
+
+#profile-text {
+  width: 20px;
+  height: 20px;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: 50% 50%; }
