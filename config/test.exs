@@ -1,5 +1,9 @@
 use Mix.Config
 
+config :hw07, Hw07.Endpoint,
+env: "test"
+
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
@@ -7,7 +11,7 @@ use Mix.Config
 # Run `mix help test` for more information.
 config :hw07, Hw07.Repo,
   username: "hw07",
-  password: "intr0vErt",
+  password: "yii7Ooxeegel",
   database: "hw07_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

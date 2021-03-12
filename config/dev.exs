@@ -1,10 +1,13 @@
 use Mix.Config
 
+config :hw07, Hw07.Endpoint,
+env: "dev"
+
 # Configure your database
 config :hw07, Hw07.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "hw07_dev",
+  username: "hw07",
+  password: "yii7Ooxeegel",
+  database: "hw07_prod",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
