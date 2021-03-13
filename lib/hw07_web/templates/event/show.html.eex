@@ -3,6 +3,9 @@
     <h2 class="mb-2 text-muted"><%= @event.when %></h2>
     <p><%= @event.description %></p>
 
+
+    <%= if have_current_user?(@conn) do %>
+
   <h4 class="my-2">Invites</h4>
 
   <ul class="list-group">
@@ -71,3 +74,6 @@
     <span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>
   </div>
 </div>
+<% else %>
+<h1 class="alert alert-warning" role="alert">Please Log In or Create an Account First!</h1>
+<% end %>
