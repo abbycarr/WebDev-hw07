@@ -17,8 +17,9 @@ defmodule Hw07Web.InviteController do
   def create(conn, %{"invite" => invite_params}) do
     case Invites.create_invite(invite_params) do
       {:ok, invite} ->
+        text =  "Invite created successfully. Send your invitees to events.clipturtle.com/events/" <> Integer.to_string(invite.event_id)
         conn
-        |> put_flash(:info, "Invite created successfully.")
+        |> put_flash(:info, text)
         |> redirect(to: Routes.invite_path(conn, :show, invite))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -42,21 +43,23 @@ defmodule Hw07Web.InviteController do
 
     case Invites.update_invite(invite, invite_params) do
       {:ok, invite} ->
+        text =  "Invite updated successfully."
         conn
-        |> put_flash(:info, "Invite updated successfully.")
-        |> redirect(to: Routes.invite_path(conn, :show, invite))
+        |> put_flash(:info, text)
+        |> redirect(to: Routes.event_path(conn, :show, invite.event_id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", invite: invite, changeset: changeset)
     end
   end
 
+  @spec delete(Plug.Conn.t(), map) :: Plug.Conn.t()
   def delete(conn, %{"id" => id}) do
     invite = Invites.get_invite!(id)
     {:ok, _invite} = Invites.delete_invite(invite)
 
     conn
     |> put_flash(:info, "Invite deleted successfully.")
-    |> redirect(to: Routes.invite_path(conn, :index))
+    |> redirect(to: Routes.event_path(conn, :show, invite.event_id))
   end
 end

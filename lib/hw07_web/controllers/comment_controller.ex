@@ -46,7 +46,7 @@ defmodule Hw07Web.CommentController do
       {:ok, comment} ->
         conn
         |> put_flash(:info, "Comment updated successfully.")
-        |> redirect(to: Routes.comment_path(conn, :show, comment))
+        |> redirect(to: Routes.event_path(conn, :show, comment.event_id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", comment: comment, changeset: changeset)

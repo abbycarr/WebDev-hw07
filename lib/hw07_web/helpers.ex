@@ -17,4 +17,9 @@ defmodule Hw07Web.Helpers do
   def current_user_is?(conn, user_id) do
     current_user_id(conn) == user_id
   end
+
+  def email_user_is?(conn, email) do
+    user = conn.assigns[:current_user]
+    user && user.email == email
+  end
 end

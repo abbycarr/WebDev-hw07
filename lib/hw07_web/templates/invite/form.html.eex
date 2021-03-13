@@ -5,11 +5,21 @@
     </div>
   <% end %>
 
+<%= hidden_input f, :event_id %>
+
+<div class="form-group">
+  <%= label f, :email %>
+  <%= text_input f, :email, class: "form-control" %>
+  <%= error_tag f, :email %>
+</div>
+
+<div class="form-group">
   <%= label f, :response %>
-  <%= text_input f, :response %>
+  <%= text_input f, :response, class: "form-control" %>
   <%= error_tag f, :response %>
+</div>
 
   <div>
-    <%= submit "Save" %>
+    <%= submit "Save", class: "btn btn-secondary" %>
   </div>
 <% end %>

@@ -20,6 +20,7 @@ defmodule Hw07.Events do
   def list_events do
     Repo.all(Event)
     |> Repo.preload(:user)
+    |> Repo.preload(:invites)
   end
 
   @doc """
@@ -40,6 +41,10 @@ defmodule Hw07.Events do
 
   def load_comments(%Event{} = event) do
     Repo.preload(event, [comments: :user])
+  end
+
+  def load_invites(%Event{} = event) do
+    Repo.preload(event, [:invites])
   end
 
   @doc """

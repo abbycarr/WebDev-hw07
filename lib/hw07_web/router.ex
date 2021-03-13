@@ -22,6 +22,7 @@ defmodule Hw07Web.Router do
     resources "/users", UserController
     get "/users/:id/prof_pic_hash", UserController, :prof_pic_hash
     resources "/comments", CommentController
+    resources "/invites", InviteController
     resources "/sessions", SessionController,
       only: [:create, :delete], singleton: true
   end

@@ -59,12 +59,17 @@ defmodule Hw07Web.EventController do
   def show(conn, %{"id" => id}) do
     event = conn.assigns[:event]
     |> Events.load_comments()
+    |> Events.load_invites()
     comm = %Hw07.Comments.Comment{
       event_id: event.id,
       user_id: current_user_id(conn),
     }
+    inn = %Hw07.Invites.Invite{
+      event_id: event.id,
+    }
     new_comment = Hw07.Comments.change_comment(comm)
-    render(conn, "show.html", event: event, new_comment: new_comment)
+    new_invite = Hw07.Invites.change_invite(inn)
+    render(conn, "show.html", event: event, new_comment: new_comment, new_invite: new_invite)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -93,6 +98,6 @@ defmodule Hw07Web.EventController do
 
     conn
     |> put_flash(:info, "Event deleted successfully.")
-    |> redirect(to: Routes.event_path(conn, :index))
+    |> redirect(to: Routes.page_path(conn, :index))
   end
 end
