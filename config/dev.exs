@@ -5,7 +5,7 @@ env: "dev"
 
 # Configure your database
 config :hw07, Hw07.Repo,
-  username: "abbycarr",
+  username: "hw07",
   password: "yii7Ooxeegel",
   database: "hw07_prod",
   hostname: "localhost",
