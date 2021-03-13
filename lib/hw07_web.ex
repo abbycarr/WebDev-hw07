@@ -23,6 +23,7 @@ defmodule Hw07Web do
 
       import Plug.Conn
       import Hw07Web.Gettext
+      import Hw07Web.Helpers
       alias Hw07Web.Router.Helpers, as: Routes
     end
   end
@@ -68,6 +69,7 @@ defmodule Hw07Web do
 
       import Hw07Web.ErrorHelpers
       import Hw07Web.Gettext
+      import Hw07Web.Helpers
       alias Hw07Web.Router.Helpers, as: Routes
     end
   end

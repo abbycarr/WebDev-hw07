@@ -1,10 +1,42 @@
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title"><%= @event.name %></h5>
-    <h6 class="card-subtitle mb-2 text-muted"><%= @event.when %></h6>
-    <p class="card-text"><%= @event.description %></p>
+<div>
+    <h1><%= @event.name %></h1>
+    <h2 class="mb-2 text-muted"><%= @event.when %></h2>
+    <p><%= @event.description %></p>
+
+  <h4>Comments</h4>
+
+  <ul class="list-group">
+  <%= for comm <- @event.comments do %>
+    <li class="list-group-item">
+      <p><span class="badge bg-dark text-light">Posted by
+        <img id="profile-text"
+              src="<%= Routes.user_path(@conn, :prof_pic_hash, comm.user)%>"
+              class="card-img-top"
+              alt="<%= comm.user.name%>'s Profile Photo"
+            /><%= comm.user.name%></span></p>
+      <p><%=comm.body%></p>
+      <%= if current_user_is?(@conn, @event.user_id) or current_user_is?(@conn, comm.user_id) do %>
+        <span><%= link "Delete", to: Routes.comment_path(@conn, :delete, comm), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      <% end %>
+    </li>
+  <% end %>
+  </ul>
+
+  <div class="border border-primary rounded my-2">
+    <h5>Add Comment</h5>
+    <%= if have_current_user?(@conn) do %>
+      <%= render(
+        Hw07Web.CommentView,
+        "form.html",
+        changeset: @new_comment,
+        action: Routes.comment_path(@conn, :create)
+      ) %>
+    <% end %>
+  </div>
+  <%= if current_user_is?(@conn, @event.user_id) do %>
     <span><%= link "Edit", to: Routes.event_path(@conn, :edit, @event) %></span>
     &nbsp;
-    <span><%= link "Back", to: Routes.event_path(@conn, :index) %></span>
+    <% end %>
+    <span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>
   </div>
 </div>

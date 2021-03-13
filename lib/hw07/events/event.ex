@@ -7,6 +7,7 @@ defmodule Hw07.Events.Event do
     field :name, :string
     field :when, :date
     belongs_to :user, Hw07.Users.User
+    has_many :comments, Hw07.Comments.Comment
 
     timestamps()
   end

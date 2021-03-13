@@ -7,6 +7,7 @@ defmodule Hw07.Users.User do
     field :name, :string
     field :prof_pic_hash, :string
     has_many :events, Hw07.Events.Event
+    has_many :comments, Hw07.Comments.Comment
 
     timestamps()
   end

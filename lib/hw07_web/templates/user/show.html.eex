@@ -9,6 +9,6 @@
     <p class="card-text"><%= @user.email %></p>
     <span><%= link "Edit", to: Routes.event_path(@conn, :edit, @user) %></span>
     &nbsp;
-    <span><%= link "Back", to: Routes.event_path(@conn, :index) %></span>
+    <span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>
   </div>
 </div>

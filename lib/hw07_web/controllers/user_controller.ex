@@ -4,6 +4,11 @@ defmodule Hw07Web.UserController do
   alias Hw07.Users
   alias Hw07.Users.User
   alias Hw07.Photos
+  alias Hw07Web.SessionController
+
+  alias Hw07Web.Plugs
+  plug Plugs.RequireUser when action
+    not in [:index, :show, :new, :create, :prof_pic_hash]
 
   def index(conn, _params) do
     users = Users.list_users()
@@ -24,7 +29,9 @@ defmodule Hw07Web.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User created successfully.")
-        |> redirect(to: Routes.user_path(conn, :show, user))
+        |> redirect(to: Routes.page_path(conn, :index))
+        |> SessionController.create(user_params)
+
 
       {:error, %Ecto.Changeset{} = changeset} ->
         IO.inspect(changeset)
@@ -79,6 +86,6 @@ defmodule Hw07Web.UserController do
 
     conn
     |> put_flash(:info, "User deleted successfully.")
-    |> redirect(to: Routes.user_path(conn, :index))
+    |> redirect(to: Routes.page_path(conn, :index))
   end
 end

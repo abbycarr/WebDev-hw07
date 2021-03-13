@@ -33,7 +33,8 @@
             />
             User: <%= @current_user.name %> |
             <%= link("Logout", to: Routes.session_path(@conn, :delete),
-            method: :delete) %>
+            method: :delete) %> |
+            <%= link "Edit User", to: Routes.user_path(@conn, :edit, @current_user) %>
           </div>
           <% else %>
           <div class="col">
@@ -46,14 +47,6 @@
               </div>
             <% end %>
         <% end %>
-
-      <div class="col">
-        <%= link "Users Table", to: Routes.user_path(@conn, :index) %>
-      </div>
-
-      <div class="col">
-        <%= link "Events Table", to: Routes.event_path(@conn, :index) %>
-      </div>
 
       </div>
 

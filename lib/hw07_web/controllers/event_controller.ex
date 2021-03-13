@@ -4,6 +4,34 @@ defmodule Hw07Web.EventController do
   alias Hw07.Events
   alias Hw07.Events.Event
 
+  alias Hw07Web.Plugs
+  plug Plugs.RequireUser when action
+    not in [:index, :show]
+  plug :fetch_post when action
+    in [:show, :photo, :edit, :update, :delete]
+  plug :require_owner when action
+    in [:edit, :update, :delete]
+
+  def fetch_post(conn, _args) do
+    id = conn.params["id"]
+    event = Events.get_event!(id)
+    assign(conn, :event, event)
+  end
+
+  def require_owner(conn, _args) do
+    user = conn.assigns[:current_user]
+    event = conn.assigns[:event]
+
+    if user.id == event.user_id do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You don't own that!!!")
+      |> redirect(to: Routes.page_path(conn, :index))
+      |> halt()
+    end
+  end
+
   def index(conn, _params) do
     events = Events.list_events()
     render(conn, "index.html", events: events)
@@ -29,12 +57,18 @@ defmodule Hw07Web.EventController do
   end
 
   def show(conn, %{"id" => id}) do
-    event = Events.get_event!(id)
-    render(conn, "show.html", event: event)
+    event = conn.assigns[:event]
+    |> Events.load_comments()
+    comm = %Hw07.Comments.Comment{
+      event_id: event.id,
+      user_id: current_user_id(conn),
+    }
+    new_comment = Hw07.Comments.change_comment(comm)
+    render(conn, "show.html", event: event, new_comment: new_comment)
   end
 
   def edit(conn, %{"id" => id}) do
-    event = Events.get_event!(id)
+    event = conn.assigns[:event]
     changeset = Events.change_event(event)
     render(conn, "edit.html", event: event, changeset: changeset)
   end
@@ -54,7 +88,7 @@ defmodule Hw07Web.EventController do
   end
 
   def delete(conn, %{"id" => id}) do
-    event = Events.get_event!(id)
+    event = conn.assigns[:event]
     {:ok, _event} = Events.delete_event(event)
 
     conn
