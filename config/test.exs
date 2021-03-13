@@ -10,9 +10,9 @@ env: "test"
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :hw07, Hw07.Repo,
-  username: "hw07",
+  username: "hw07two",
   password: "yii7Ooxeegel",
-  database: "hw07_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "hw07two_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 

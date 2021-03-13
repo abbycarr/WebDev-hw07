@@ -6,7 +6,7 @@ export MIX_ENV=prod
 # on is something like 1025-32767
 export PORT=4803
 export SECRET_KEY_BASE=insecure
-export DATABASE_URL=ecto://hw07:bad@localhost/hw07_prod
+export DATABASE_URL=ecto://hw07two:bad@localhost/hw07two_prod
 
 
 mix deps.get --only prod
@@ -30,7 +30,7 @@ SECRET_KEY_BASE=$(cat "$CFGD/bb")
 export SECRET_KEY_BASE
 
 DB_PASS=$(cat "$CFGD/db_plz")
-export DATABASE_URL=ecto://hw07:$DB_PASS@localhost/hw07_prod
+export DATABASE_URL=ecto://hw07two:$DB_PASS@localhost/hw07two_prod
 
 
 # mix ecto.create

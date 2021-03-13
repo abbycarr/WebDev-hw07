@@ -5,9 +5,9 @@ env: "dev"
 
 # Configure your database
 config :hw07, Hw07.Repo,
-  username: "hw07",
+  username: "hw07two",
   password: "yii7Ooxeegel",
-  database: "hw07_prod",
+  database: "hw07two_prod",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
